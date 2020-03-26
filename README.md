@@ -12,6 +12,4 @@ have been detected, users take a screenshot and upload the image to the site. <b
 
 All the images that have been uploaded are displayed on scroll below the cam section. A modal box appears by clicking on each image where users can leave comments. Each image also has a specific url that users can send for reference.<br /><br />
 Technologies: HTML, CSS, JavaScript, Node with Express.js, PostgreSQL <br />
-Library: Vue.js <br />
-API: face-api.js <br />
-Storage: AWS
+Library: Vue.js | API: face-api.js | Storage: AWS
