@@ -1,9 +1,9 @@
-# selfie-imageboard
+# Face-dectection, selfie imageboard made with Vue.js
 
 ![screenshot 1](screenshot_imageboard-1.png)
 ![screenshot 1](screenshot_imageboard-2.png)
 
-Instagram-inspired selfie imageboard developed
+Instagram-inspired imageboard developed
 with Vue.js and using the face recognition API [face-api.js](https://github.com/justadudewhohacks/face-api.js). <br /><br />
 
 Users' webcams are connected to the site and their faces are automatically detected by the API.
