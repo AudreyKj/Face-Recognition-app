@@ -148,4 +148,7 @@ app.get("/pagination/:cutoff", (req, res) => {
     });
 });
 
-app.listen(8080, () => console.log("server listening on port 8080"));
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Our app is running on port ${PORT}`);
+});
