@@ -1,4 +1,5 @@
 (function() {
+  //modal
   Vue.component("modal-component", {
     template: "#modal-component",
     props: ["id"],
@@ -19,7 +20,6 @@
       };
     },
     mounted: function() {
-      //the modal shows the image and its comments on click
       var me = this;
 
       axios
@@ -41,7 +41,7 @@
         });
     },
     watch: {
-      //watch to track props id's change
+      //track props id's change
       id: function() {
         var me = this;
         axios
@@ -55,25 +55,21 @@
       }
     },
     methods: {
-      //close the modal and reset the hash
       closeModal: function() {
         //emit to tell the instance to close the modal
         this.$emit("changingid-close");
         location.hash = "";
       },
-      //send comments
       sendingComment: function(e) {
         var me = this;
 
         e.preventDefault();
 
-        //show an error if one of the fields is empty
         if (
           me.newComment.username.length === 0 ||
           me.newComment.comment.length === 0
         ) {
-          this.error = true;
-          return;
+          return (this.error = true);
         }
 
         let commentInfo = {
@@ -89,12 +85,12 @@
             me.comments.unshift(response.data);
           })
           .catch(function(error) {
-            console.log("error inside send comments", error);
+            return (me.error = true);
           });
       }
     }
   });
-
+  //info box
   Vue.component("info-component", {
     template: "#info-component",
     data: function() {
@@ -107,7 +103,7 @@
       }
     }
   });
-
+  //main: cam and images
   new Vue({
     el: "#main",
     data: {
@@ -189,7 +185,7 @@
       });
       ///FACE API ENDS HERE////
 
-      // get images added to the imageboard
+      //get images added to the imageboard
       var me = this;
       axios
         .get("/images")
@@ -207,14 +203,13 @@
           console.log("error in get images - vue instance", error)
         );
 
-      //hashchange: we slice the location.hash to get the number of the hash
+      //slice the location.hash to get the number of the hash
       window.addEventListener("hashchange", function() {
         me.id = location.hash.slice(1);
       });
     },
     methods: {
       submitFile: function(e) {
-        //preventing default page reload
         e.preventDefault();
 
         var fomData = new FormData();
@@ -226,7 +221,8 @@
         if (
           this.title.length === 0 ||
           this.description.length === 0 ||
-          this.username.length === 0
+          this.username.length === 0 ||
+          !this.file
         ) {
           this.error = true;
           return;
@@ -237,11 +233,15 @@
         axios
           .post("/upload", fomData)
           .then(function({ data }) {
+            if (data.error) {
+              return (me.error = true);
+            }
+
             me.error = false;
             me.images.unshift(data);
           })
           .catch(function(error) {
-            console.log("error in submitting file", error);
+            return (me.error = true);
           });
       },
       uploading: function(e) {
@@ -263,8 +263,8 @@
       clickMore: function(images) {
         this.images = images;
 
-        //lowestId is the lowest id in the database
-        //cutoff is the lowest id on screen
+        //lowestId: lowest id in the database
+        //cutoff: lowest id on screen
         let idList = [];
         let cutoff = "";
         for (let i = 0; i < this.images.length; i++) {
@@ -285,7 +285,7 @@
             let merging = images.concat(data);
             me.images = merging;
 
-            //hide the more button if one of the images's id
+            //hide the more button if one of the images' id
             //matches the lowest id in the database(=last image)
             for (let i = 0; i < me.images.length; i++) {
               if (me.images[i].id === me.images[i].lowestId) {

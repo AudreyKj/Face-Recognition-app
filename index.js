@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const db = require("./db.js");
-const s3 = require("./s3.js");
+const cloudinary = require("cloudinary");
+const cron = require("node-cron");
 
 //////////FILE UPLOAD BOILERPLATE CODE /////////////////
 const multer = require("multer");
@@ -10,7 +11,7 @@ const path = require("path");
 
 const diskStorage = multer.diskStorage({
   destination: function(req, file, callback) {
-    callback(null, __dirname + "/uploads");
+    callback(null, "./public" + "/uploads");
   },
   filename: function(req, file, callback) {
     uidSafe(24).then(function(uid) {
@@ -22,7 +23,7 @@ const diskStorage = multer.diskStorage({
 const uploader = multer({
   storage: diskStorage,
   limits: {
-    fileSize: 2097152
+    fileSize: 800000
   }
 });
 //////////FILE UPLOAD BOILERPLATE CODE ENDS HERE/////////////////
@@ -41,26 +42,58 @@ app.get("/images", (req, res) => {
     });
 });
 
-app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-  if (req.file) {
-    console.log("req.file.filename", req.file.filename);
-    let username = req.body.username;
-    let title = req.body.title;
-    let description = req.body.description;
+require("dotenv").config();
 
-    const name1 = "https://s3.amazonaws.com/retina-imageboard/";
-    const url = name1.concat(req.file.filename);
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+});
 
-    db.addImage(url, username, title, description)
-      .then(function(result) {
-        return res.json(result.rows[0]);
-      })
-      .catch(function(error) {
-        console.log("error in addImage", error);
+app.post("/upload", (req, res) => {
+  uploader.single("file")(req, res, function(err) {
+    if (err instanceof multer.MulterError) {
+      return res.json({ error: true });
+    } else if (err) {
+      return res.json({ error: true });
+    }
+
+    if (req.file) {
+      let username = req.body.username;
+      let title = req.body.title;
+      let description = req.body.description;
+
+      cloudinary.uploader.upload(req.file.path, function(result) {
+        console.log(result);
+        const url = result.url;
+
+        db.addImage(url, username, title, description)
+          .then(function(result) {
+            return res.json(result.rows[0]);
+          })
+          .catch(function(err) {
+            return res.json({ error: true });
+          });
       });
-  } else {
-    res.json({ success: false });
-  }
+    } else {
+      return res.json({ error: true });
+    }
+  });
+});
+
+//cleaning images in the database every 15min
+cron.schedule("0,15,30,45 * * * *", function() {
+  db.cleanCommentsDb()
+    .then(function(result) {
+      db.cleanImagesDb()
+        .then(function(result) {})
+        .catch(function(err) {
+          console.log(err, "error in cron task");
+        });
+    })
+    .catch(function(err) {
+      console.log(err, "error in cron task");
+    });
 });
 
 app.get("/images/:id", (req, res) => {
@@ -71,7 +104,7 @@ app.get("/images/:id", (req, res) => {
       return res.json(result.rows);
     })
     .catch(function(err) {
-      console.log("err inside image", err);
+      console.log("err inside get image's id", err);
     });
 });
 
@@ -97,12 +130,12 @@ app.post("/comment/sendComments", (req, res) => {
       return res.json(result.rows[0]);
     })
     .catch(function(err) {
-      console.log("err inside send comment", err);
+      return res.status(400);
     });
 });
 
 app.get("/pagination/:cutoff", (req, res) => {
-  //cutoff is the lowest id on screen //
+  //cutoff is the lowest id on screen
   //lowestId is the lowest id in the database
   let cutoff = req.params.cutoff;
 
