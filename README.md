@@ -3,8 +3,7 @@
 ![screenshot 1](screenshot_imageboard-1.png)
 ![screenshot 1](screenshot_imageboard-2.png)
 
-Instagram-inspired imageboard developed
-with Vue.js and using the face recognition API [face-api.js](https://github.com/justadudewhohacks/face-api.js). <br /><br />
+Vue.js app using the face recognition API [face-api.js](https://github.com/justadudewhohacks/face-api.js). <br /><br />
 
 Users' webcams are connected to the site and their faces are automatically detected by the API.
 The API visually indicates its assumptions on their age, gender, and emotion. Once their faces

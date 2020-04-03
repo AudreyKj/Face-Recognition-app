@@ -4,7 +4,7 @@ const db = require("./db.js");
 const cloudinary = require("cloudinary");
 const cron = require("node-cron");
 
-//////////FILE UPLOAD BOILERPLATE CODE /////////////////
+//multer for file upload
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const path = require("path");
@@ -26,12 +26,12 @@ const uploader = multer({
     fileSize: 800000
   }
 });
-//////////FILE UPLOAD BOILERPLATE CODE ENDS HERE/////////////////
 
 app.use(express.static("./public"));
 
 app.use(express.json());
 
+//get images
 app.get("/images", (req, res) => {
   db.getImage()
     .then(function(result) {
@@ -42,6 +42,7 @@ app.get("/images", (req, res) => {
     });
 });
 
+//file upload
 require("dotenv").config();
 
 cloudinary.config({
@@ -96,6 +97,7 @@ cron.schedule("0,15,30,45 * * * *", function() {
     });
 });
 
+//get clicked image
 app.get("/images/:id", (req, res) => {
   let id = req.params.id;
 
@@ -108,6 +110,7 @@ app.get("/images/:id", (req, res) => {
     });
 });
 
+//get clicked image's comments
 app.get("/comment/:id", (req, res) => {
   let id = req.params.id;
 
@@ -120,6 +123,7 @@ app.get("/comment/:id", (req, res) => {
     });
 });
 
+//send comments
 app.post("/comment/sendComments", (req, res) => {
   let username = req.body.username;
   let comment = req.body.comment;
@@ -134,6 +138,7 @@ app.post("/comment/sendComments", (req, res) => {
     });
 });
 
+//fetch next results
 app.get("/pagination/:cutoff", (req, res) => {
   //cutoff is the lowest id on screen
   //lowestId is the lowest id in the database
@@ -148,7 +153,6 @@ app.get("/pagination/:cutoff", (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Our app is running on port ${PORT}`);
+server.listen(process.env.PORT || 8080, function() {
+  console.log("I'm listening.");
 });
