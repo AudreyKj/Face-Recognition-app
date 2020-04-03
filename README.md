@@ -1,4 +1,4 @@
-# Face-dectection, selfie imageboard made with Vue.js
+# Face-dectection, selfie app made with Vue.js
 
 ![screenshot 1](screenshot_imageboard-1.png)
 ![screenshot 1](screenshot_imageboard-2.png)
