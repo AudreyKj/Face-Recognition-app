@@ -14,3 +14,5 @@ I've automated a regular clean-up of the images in the database with Node Cron.
 <br /><br />
 Technologies: HTML, CSS, JavaScript, Node with Express.js, PostgreSQL <br />
 Library: Vue.js | API: face-api.js | Storage: Cloudinary
+<br /><br />
+Live app coming soon!
