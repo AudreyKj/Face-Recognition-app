@@ -71,6 +71,7 @@ app.post("/upload", (req, res) => {
 
         db.addImage(url, username, title, description)
           .then(function(result) {
+            console.log("result.rows[0]", result.rows[0]);
             return res.json(result.rows[0]);
           })
           .catch(function(err) {
