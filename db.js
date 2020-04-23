@@ -57,11 +57,11 @@ LIMIT 10;`,
 }
 
 function cleanImagesDb() {
-  return db.query(`DELETE FROM images WHERE id > 4`);
+  return db.query(`DELETE FROM images WHERE id > 5`);
 }
 
 function cleanCommentsDb() {
-  return db.query(`DELETE FROM comments WHERE image_id > 4`);
+  return db.query(`DELETE FROM comments WHERE image_id > 5`);
 }
 
 exports.getImage = getImage;
