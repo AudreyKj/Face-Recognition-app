@@ -35,10 +35,10 @@ app.use(express.json());
 //get images
 app.get("/images", (req, res) => {
   db.getImage()
-    .then(function(result) {
+    .then(result => {
       return res.json(result);
     })
-    .catch(function(err) {
+    .catch(err => {
       console.log("err in getImages", err);
     });
 });
@@ -84,16 +84,18 @@ app.post("/upload", (req, res) => {
 });
 
 //cleaning images in the database every 15min
-cron.schedule("0,15,30,45 * * * *", function() {
+cron.schedule("0,15,30,45 * * * *", () => {
   db.cleanCommentsDb()
-    .then(function(result) {
+    .then(result => {
       db.cleanImagesDb()
-        .then(function(result) {})
-        .catch(function(err) {
+        .then(result => {
+          console.log("Node cron clean-up");
+        })
+        .catch(err => {
           console.log(err, "error in cron task");
         });
     })
-    .catch(function(err) {
+    .catch(err => {
       console.log(err, "error in cron task");
     });
 });
@@ -103,10 +105,10 @@ app.get("/images/:id", (req, res) => {
   let id = req.params.id;
 
   db.getImageClicked(id)
-    .then(function(result) {
+    .then(result => {
       return res.json(result.rows);
     })
-    .catch(function(err) {
+    .catch(err => {
       console.log("err inside get image's id", err);
     });
 });
@@ -116,10 +118,10 @@ app.get("/comment/:id", (req, res) => {
   let id = req.params.id;
 
   db.getCommentOnImg(id)
-    .then(function(result) {
+    .then(result => {
       return res.json(result.rows);
     })
-    .catch(function(err) {
+    .catch(err => {
       console.log("err inside get comment", err);
     });
 });
@@ -131,10 +133,10 @@ app.post("/comment/sendComments", (req, res) => {
   let image_id = req.body.image_id;
 
   db.insertComment(username, comment, image_id)
-    .then(function(result) {
+    .then(result => {
       return res.json(result.rows[0]);
     })
-    .catch(function(err) {
+    .catch(err => {
       return res.status(400);
     });
 });
@@ -146,14 +148,14 @@ app.get("/pagination/:cutoff", (req, res) => {
   let cutoff = req.params.cutoff;
 
   db.fetchNextResults(cutoff)
-    .then(function(result) {
+    .then(result => {
       return res.json(result.rows);
     })
-    .catch(function(err) {
+    .catch(err => {
       console.log("err inside fetchNextResults", err);
     });
 });
 
-server.listen(process.env.PORT || 8080, function() {
-  console.log("I'm listening.");
+server.listen(process.env.PORT || 8080, () => {
+  console.log("server listening");
 });

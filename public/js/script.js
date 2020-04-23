@@ -235,10 +235,10 @@
           .then(function({ data }) {
             if (data.error) {
               return (me.error = true);
+            } else {
+              me.error = false;
+              me.images.unshift(data);
             }
-
-            me.error = false;
-            me.images.unshift(data);
           })
           .catch(function(error) {
             return (me.error = true);

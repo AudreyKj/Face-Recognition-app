@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RETINA</title>
+    <title>📷 face-detection app</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/reset.css" />
   </head>
@@ -16,6 +16,14 @@
       <info-component v-if="info" @closeinfo="closeinfo"></info-component>
 
       <div class="openinfo" @click="openinfo">?</div>
+
+      <!-- Mobile  -->
+      <div class="mobile">
+        <p class="info-mobile">
+          This face-detection app is designed to be viewed on a larger screen.
+          Please revisit using a laptop or desktop computer.
+        </p>
+      </div>
 
       <!-- videocam + upload  -->
       <div id="modal-videocam">

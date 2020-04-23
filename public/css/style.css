@@ -6,6 +6,38 @@ body {
 }
 
 /*
+MOBILE
+*/
+div.mobile {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  div.mobile {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1500;
+    background-color: blue;
+    left: 0;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  p.info-mobile {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/*
 MAIN
 */
 
