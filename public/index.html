@@ -114,6 +114,10 @@
               Error: please make sure you filled in all the fields and that your
               file size does not exceed 800kb.</span
             >
+
+            <span v-if="success" class="success">
+              Thank you for participating!
+            </span>
           </form>
         </div>
       </div>
@@ -137,7 +141,7 @@
 
     <!-- component for info box  -->
     <script id="info-component" type="text/x-template">
-      <transition name="slide">
+      <transition name="slide" >
          <div  class="info-box">
              <div class="close-info" @click="closeinfo"> X </div>
                  <p class="info">
@@ -151,6 +155,7 @@
                      <br><br>
                      COMMENT  <br> you can leave comments by clicking on the images!
                      <br><br>
+                     A regular cleanup is automated every 15 min on the database.
                    </p>
                </div>
         </transition>
@@ -179,8 +184,8 @@
           <label class="lightgrey" for="comment"> COMMENT </label>
           <input  class="modal-input" v-model="newComment.comment" type="text" name="comment" placeholder="your comment" autocomplete="off" minlength="2" required />
           <button class="submitcomment" @click="sendingComment"> SUBMIT </button>
-          <span v-if="error" class="error-comment"> Oops, something went wrong! please make none of the fields are empty
-            before submitting your comment.</span>
+          <span v-if="error" class="error-comment"> Error: please make none of the fields are empty
+            before submitting.</span>
         </form>
 
           <div class="comments">

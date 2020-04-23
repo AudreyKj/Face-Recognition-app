@@ -82,6 +82,8 @@
           .post(`/comment/sendComments`, commentInfo)
           .then(function(response) {
             me.error = false;
+            me.newComment.username = "";
+            me.newComment.comment = "";
             me.comments.unshift(response.data);
           })
           .catch(function(error) {
@@ -118,7 +120,8 @@
       username: "",
       file: null,
       info: false,
-      error: false
+      error: false,
+      success: false
     },
     mounted: function() {
       ///FACE API STARTS HERE ////
@@ -237,7 +240,15 @@
               return (me.error = true);
             } else {
               me.error = false;
+              me.success = true;
+              me.title = "";
+              me.description = "";
+              me.username = "";
               me.images.unshift(data);
+
+              setTimeout(() => {
+                me.success = false;
+              }, 3000);
             }
           })
           .catch(function(error) {
