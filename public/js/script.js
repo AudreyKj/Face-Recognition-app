@@ -237,6 +237,7 @@
           .post("/upload", fomData)
           .then(function({ data }) {
             if (data.error) {
+              console.log("error", data.error);
               return (me.error = true);
             } else {
               me.error = false;
@@ -252,7 +253,9 @@
             }
           })
           .catch(function(error) {
-            return (me.error = true);
+            console.log("error", error);
+            me.error = true;
+            return;
           });
       },
       uploading: function(e) {
