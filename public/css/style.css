@@ -21,6 +21,7 @@ div.mobile {
     height: 100%;
     position: fixed;
     z-index: 2000;
+    opacity: 0.65;
     background-color: blue;
     left: 0;
 
@@ -37,6 +38,7 @@ p.info-mobile {
   line-height: 1.5;
   padding-left: 20px;
   padding-right: 20px;
+  text-align: center;
 }
 
 /*
