@@ -66,8 +66,7 @@ app.post("/upload", (req, res) => {
       let description = req.body.description;
 
       cloudinary.uploader.upload(req.file.path, function(result) {
-        console.log(result);
-        const url = result.url;
+        const url = result.secure_url;
 
         db.addImage(url, username, title, description)
           .then(function(result) {
