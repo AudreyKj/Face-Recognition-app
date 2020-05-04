@@ -24,7 +24,18 @@ I've automated a regular clean-up of the images in the database with Node Cron t
 ## Future improvements
 
 - Improve uploading of images with automatic screenshot of the canvas
-- Adding "like" feature on images
+
+## Design - color palette
+
+<p align="center">
+<img width="150" height="250" src="palette.jpg">
+<p align="center">
+dark grey, #808080 </br>
+grey, #989898 </br>
+light grey, #b3b3b3 </br>
+blue, #0000ff </br>
+</p>
+</p>
 
 ## Visuals
 
