@@ -9,6 +9,8 @@ The images that have been uploaded are displayed on scroll below the cam section
 
 I've automated a regular clean-up of the images in the database with Node Cron to prevent overflow.
 
+[visit live app](https://face-face-face.herokuapp.com/)
+
 ## Features
 
 - face-detection API on users' cam
@@ -40,4 +42,3 @@ blue, #0000ff </br>
 ## Visuals
 
 ![screenshot 1](screenshot_imageboard-1.png)
-![screenshot 1](screenshot_imageboard-2.png)
