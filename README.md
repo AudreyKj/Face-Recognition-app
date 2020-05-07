@@ -41,4 +41,5 @@ blue, #0000ff </br>
 
 ## Visuals
 
-![screenshot 1](screenshot_imageboard-1.png)
+![screenshot 1](visual-imageboard-1.png)
+![screenshot 2](visual-imageboard-2.png)
