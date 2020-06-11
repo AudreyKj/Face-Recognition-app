@@ -237,7 +237,7 @@
           .post("/upload", fomData)
           .then(function({ data }) {
             if (data.error) {
-              console.log("error", data.error);
+              //console.log("error", data.error);
               return (me.error = true);
             } else {
               me.error = false;
