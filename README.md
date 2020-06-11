@@ -21,7 +21,8 @@ I've automated a regular clean-up of the images in the database with Node Cron t
 ## Tech
 
 **Stack**: HTML, CSS, JavaScript, Node with Express.js, PostgreSQL <br />
-**Framework**: Vue.js | **Storage**: Cloudinary | **Deployment**: Heroku
+**Framework**: Vue.js | **Storage**: in dev: AWS / in prod: Cloudinary </br>
+**Deployment**: Heroku
 
 ## Future improvements
 
@@ -41,5 +42,5 @@ blue, #0000ff </br>
 
 ## Visuals
 
-![screenshot 1](visual-imageboard-1.png)
-![screenshot 2](visual-imageboard-2.png)
+![screenshot 1](screenshot_1.png)
+![screenshot 2](screenshot_2.png)
