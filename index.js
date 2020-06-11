@@ -55,9 +55,9 @@ cloudinary.config({
 app.post("/upload", (req, res) => {
   uploader.single("file")(req, res, function(err) {
     if (err instanceof multer.MulterError) {
-      return res.json({ error: true });
+      return res.json({ error: "multer error" });
     } else if (err) {
-      return res.json({ error: true });
+      return res.json({ error: "multer error" });
     }
 
     if (req.file) {
@@ -74,7 +74,7 @@ app.post("/upload", (req, res) => {
             return res.json(result.rows[0]);
           })
           .catch(function(err) {
-            return res.json({ error: true });
+            return res.json({ error: "error in adding database" });
           });
       });
     } else {
