@@ -24,10 +24,6 @@ I've automated a regular clean-up of the images in the database with Node Cron t
 **Framework**: Vue.js | **Storage**: in dev: AWS / in prod: Cloudinary </br>
 **Deployment**: Heroku
 
-## Future improvements
-
-- Improve uploading of images with automatic screenshot of the canvas
-
 ## Design - color palette
 
 <p align="center">
