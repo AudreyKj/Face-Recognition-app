@@ -235,7 +235,8 @@ div.close-info:hover {
 /* inputs in main */
 input,
 input:focus {
-  outline: none;
+  border: none;
+  outline-color: white;
 }
 
 button.inputs-main {
@@ -402,12 +403,13 @@ MODAL - IMAGE
 
 div.modal {
   width: 85%;
-  height: 80%;
+  height: 85%;
   position: fixed;
   margin-top: 20px;
   z-index: 1000;
   background-color: grey;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 10px;
 }
 
 /* @media (max-width: 770px) {
@@ -464,6 +466,7 @@ div.image-modal {
   border: 1px solid white;
   align-items: center;
 }
+
 /*
 @media (max-width: 425px) {
   div.image-modal {
@@ -570,6 +573,7 @@ button.submitcomment {
 button.submitcomment:hover {
   background-color: #cccccc;
 }
+
 /*
 @media (max-width: 425px) {
   button.submitcomment {
@@ -581,8 +585,16 @@ button.submitcomment:hover {
 
 input.modal-input {
   margin-top: 5px;
-  margin-bottom: 5px;
-  width: 120px;
+  margin-bottom: 15px;
+  width: 50%;
+}
+
+textarea {
+  width: 60%;
+  height: 15%;
+  margin-top: 5px;
+  border: none;
+  outline-color: white;
 }
 
 span.error {

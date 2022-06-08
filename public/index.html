@@ -1,179 +1,145 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>📷 face-detection app</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/reset.css" />
-    <meta property="og:image" content="preview.jpg" />
-  </head>
-  <body>
-    <!-- MAIN  -->
-    <div id="main">
-      <modal-component
-        :id="id"
-        v-if="id"
-        @changingid-close="closemodal"
-      ></modal-component>
-      <info-component v-if="info" @closeinfo="closeinfo"></info-component>
 
-      <div class="openinfo" @click="openinfo">?</div>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>📷 face-detection app</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/reset.css" />
+  <meta property="og:image" content="preview.jpg" />
+</head>
 
-      <!-- Mobile  -->
-      <div class="mobile">
-        <p class="info-mobile">
-          This face-detection app is designed to be viewed on a larger screen.
-          Please revisit using a laptop or desktop computer.
-        </p>
+<body>
+  <!-- MAIN  -->
+  <div id="main">
+    <modal-component :id="id" v-if="id" @changingid-close="closemodal"></modal-component>
+    <info-component v-if="info" @closeinfo="closeinfo"></info-component>
+
+    <div class="openinfo" @click="openinfo">?</div>
+
+    <!-- Mobile  -->
+    <div class="mobile">
+      <p class="info-mobile">
+        This face-detection app is designed to be viewed on a larger screen.
+        Please revisit using a laptop or desktop computer.
+      </p>
+    </div>
+
+    <!-- videocam + upload  -->
+    <div id="modal-videocam">
+      <div class="guidelines" v-if="guidelines">
+        <div id="close-instructions" @click="closeguidelines">X</div>
+        <span class="instructions">
+          CONNECT YOUR CAMERA <br />
+          Please allow access to your camera to use the face detection API
+        </span>
+        <span class="instructions">
+          TAKE A SCREENSHOT <br />
+          Take a screenshot centered on your face and upload the image to the
+          imageboard</span>
+        <span class="instructions">
+          BROWSE AND COMMENT ON POSTED IMAGES<br />
+          Scroll to browse the images that have been posted by others. <br />
+          You can leave comments by clicking on the images!
+        </span>
       </div>
 
-      <!-- videocam + upload  -->
-      <div id="modal-videocam">
-        <div class="guidelines" v-if="guidelines">
-          <div id="close-instructions" @click="closeguidelines">X</div>
-          <span class="instructions">
-            CONNECT YOUR CAMERA <br />
-            please give us access to your camera to use the face detection API
-          </span>
-          <span class="instructions">
-            TAKE A SCREENSHOT <br />
-            take a screenshot centered on your face and upload the image to the
-            imageboard</span
-          >
-          <span class="instructions">
-            COMMENT <br />
-            you can leave comments by clicking on the images!
-          </span>
-        </div>
+      <video id="video" width="700px" height="500px" autoplay muted></video>
 
-        <video id="video" width="700px" height="500px" autoplay muted></video>
-
-        <div class="inputs">
-          <form class="info-inputs">
-            <div class="inputs-info">
-              <div class="input-wrapper">
-                <label for="title"> TITLE</label>
-                <input
-                  class="main"
-                  v-model="title"
-                  type="text"
-                  name="title"
-                  placeholder="title"
-                  autocomplete="off"
-                  required
-                  pattern="\S+.*"
-                />
-              </div>
-
-              <div class="input-wrapper">
-                <label for="description"> DESCRIPTION</label>
-                <input
-                  class="main"
-                  v-model="description"
-                  type="text"
-                  name="description"
-                  placeholder="description"
-                  autocomplete="off"
-                  required
-                  pattern="\S+.*"
-                />
-              </div>
-
-              <div class="input-wrapper">
-                <label for="username"> USERNAME</label>
-                <input
-                  class="main"
-                  v-model="username"
-                  type="text"
-                  name="username"
-                  placeholder="username"
-                  autocomplete="off"
-                  required
-                  pattern="\S+.*"
-                />
-              </div>
+      <div class="inputs">
+        <form class="info-inputs">
+          <div class="inputs-info">
+            <div class="input-wrapper">
+              <label for="title"> TITLE</label>
+              <input class="main" v-model="title" type="text" name="title" placeholder="title" autocomplete="off"
+                required pattern="\S+.*" />
             </div>
 
-            <label for="file-upload" class="custom-file-upload">
-              UPLOAD SCREENSHOT
-              <img class="logo-upload" src="download-file.svg" alt="download" />
-            </label>
+            <div class="input-wrapper">
+              <label for="description"> DESCRIPTION</label>
+              <input class="main" v-model="description" type="text" name="description" placeholder="description"
+                autocomplete="off" required pattern="\S+.*" />
+            </div>
 
-            <input
-              id="file-upload"
-              class="file"
-              @change="uploading"
-              type="file"
-              name="file"
-              accept="image/*"
-            />
+            <div class="input-wrapper">
+              <label for="username"> USERNAME</label>
+              <input class="main" v-model="username" type="text" name="username" placeholder="username"
+                autocomplete="off" required pattern="\S+.*" />
+            </div>
+          </div>
 
-            <button id="submit" class="inputs-main" @click="submitFile">
-              SUBMIT
-            </button>
+          <label for="file-upload" class="custom-file-upload">
+            UPLOAD SCREENSHOT
+            <img class="logo-upload" src="download-file.svg" alt="download" />
+          </label>
 
-            <span v-if="error" class="error">
-              Error: please make sure you filled in all the fields and that your
-              file size does not exceed 800kb.</span
-            >
+          <input id="file-upload" class="file" @change="uploading" type="file" name="file" accept="image/*" />
 
-            <span v-if="success" class="success">
-              Thank you for participating!
-            </span>
-          </form>
-        </div>
-      </div>
+          <button id="submit" class="inputs-main" @click="submitFile">
+            SUBMIT
+          </button>
 
-      <!-- images in main  -->
-      <div class="images-wrapper">
-        <div class="images" v-for="image in images">
-          <!-- binding the image.id to the link for the modal -->
-          <a :href="'#' + image.id">
-            <img class="images-board" :src="image.url" alt="image" />
-          </a>
-          <span class="title"> {{image.title}} </span>
-        </div>
+          <span v-if="error" class="error">
+            Error: please make sure you filled in all the fields and that your
+            file size does not exceed 800kb.</span>
 
-        <button v-if="showingMore" id="more" @click="clickMore(images)">
-          MORE <br />
-          ↓
-        </button>
+          <span v-if="success" class="success">
+            Thank you for participating!
+          </span>
+        </form>
       </div>
     </div>
 
-    <!-- component for info box  -->
-    <script id="info-component" type="text/x-template">
+    <!-- images in main  -->
+    <div class="images-wrapper">
+      <div class="images" v-for="image in images">
+        <!-- binding the image.id to the link for the modal -->
+        <a :href="'#' + image.id">
+          <img class="images-board" :src="image.url" alt="image" />
+        </a>
+        <span class="title"> {{image.title}} </span>
+      </div>
+
+      <button v-if="showingMore" id="more" @click="clickMore(images)">
+        MORE <br />
+        ↓
+      </button>
+    </div>
+  </div>
+
+  <!-- component for info box  -->
+  <script id="info-component" type="text/x-template">
       <transition name="slide" >
          <div  class="info-box">
              <div class="close-info" @click="closeinfo"> X </div>
+
                  <p class="info">
-                   <span class="italic"> this site was developed by <a class="info" href="https://github.com/AudreyKj" target="_blank"> Audrey Kadjar </a> as an experimental
-                     selfie imageboard. it uses the JavaScript face recognition API <a class="info" href="https://github.com/justadudewhohacks/face-api.js" target="_blank">
-                     face-api.js </a> along with framework <a class="info" href="https://vuejs.org/" target="_blank">Vue.js.</a></span>
                      <br><br>
-                     CONNECT YOUR CAMERA <br> please give us access to your camera to use the face detection API
+                     CONNECT YOUR CAMERA <br> please allow access to your camera to use the face detection API
                      <br><br>
                      TAKE A SCREENSHOT <br> take a screenshot centered on your face and upload the image to the imageboard
                      <br><br>
-                     COMMENT  <br> you can leave comments by clicking on the images!
+                     BROWSE AND COMMENT ON POSTED IMAGES <br> scroll to browse the images that have been posted by others; <br />
+                     you can leave comments by clicking on the images
                      <br><br>
-                     A regular cleanup is automated every 15 min on the database.
-                     <br><br> NOTE: the API doesn't work on mobile: please visit this app from a larger screen.
 
+                     <span class="italic"> this site was developed by <a class="info" href="https://github.com/AudreyKj" target="_blank"> Audrey Kadjar </a> <br />
+                      more information on <a class="info" href="https://github.com/AudreyKj" target="_blank"> GitHub </a></span>
                    </p>
+
                </div>
         </transition>
     </script>
 
-    <!-- component for modal displaying an image and its comments  -->
-    <script id="modal-component" type="text/x-template">
+  <!-- component for modal displaying an image and its comments  -->
+  <script id="modal-component" type="text/x-template">
       <transition name="fade">
           <div class="modal">
           <div id="close" @click='closeModal'> X </div>
 
       <div class="content-modal">
         <div class="image-modal">
-          <img class="modal" :src="image.url" alt="image"/>
+          <img class="modal" :src="image.url" alt="uploaded by user"/>
 
           <span class="title"> <span class="lightgrey"> TITLE: </span> {{image.title}} </span><br>
           <span class="title"> <span class="lightgrey"> USERNAME: </span> {{image.username}} </span><br>
@@ -184,9 +150,9 @@
         <form  class="comment" action="/sendComments/" method="post">
           <span class="comment-title"> ADD A COMMENT </span>
           <label class="lightgrey" for="username"> USERNAME </label>
-          <input class="modal-input" v-model="newComment.username" type="text" name="username" placeholder="username" autocomplete="off" minlength="2" required />
+          <input class="modal-input" v-model="newComment.username" type="text" name="username" id="username" placeholder="username" autocomplete="off" minlength="2" required />
           <label class="lightgrey" for="comment"> COMMENT </label>
-          <input  class="modal-input" v-model="newComment.comment" type="text" name="comment" placeholder="your comment" autocomplete="off" minlength="2" required />
+          <textarea v-model="newComment.comment" type="text" name="comment" id="comment" placeholder="your comment" autocomplete="off" minlength="2" required></textarea>
           <button class="submitcomment" @click="sendingComment"> SUBMIT </button>
           <span v-if="error" class="error-comment"> Error: please make none of the fields are empty
             before submitting.</span>
@@ -204,9 +170,10 @@
       </transition>
     </script>
 
-    <script src="/js/vue.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/js/face-api.min.js"></script>
-    <script src="/js/script.js"></script>
-  </body>
+  <script src="/js/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/js/face-api.min.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+
 </html>
