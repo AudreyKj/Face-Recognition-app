@@ -22,7 +22,6 @@ The images that have been uploaded are displayed on scroll below the cam section
 **Storage**: Cloudinary </br>
 **Deployment**: Heroku
 
-## Screenshot
+## Screenshots
 
 ![screenshot 1](screenshot_1.png)
-![screenshot 2](screenshot_2.png)

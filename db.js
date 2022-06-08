@@ -8,6 +8,8 @@ const db = new Pool({
   connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
 });
 
+console.log('db', db)
+
 function getImage() {
   return db.query(`SELECT * FROM images
       ORDER BY id DESC
