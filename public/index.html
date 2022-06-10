@@ -79,11 +79,10 @@
             SUBMIT
           </button>
 
-          <span v-if="error" class="error">
-            Error: please make sure you filled in all the fields and that your
-            file size does not exceed 800kb.</span>
+          <span v-if="error" class="error" v-cloak>
+            Error: check that the fields are filled and try with a smaller file</span>
 
-          <span v-if="success" class="success">
+          <span v-if="success" class="success" v-cloak>
             Thank you for participating!
           </span>
         </form>
@@ -109,7 +108,7 @@
 
   <!-- component for info box  -->
   <script id="info-component" type="text/x-template">
-      <transition name="slide" >
+      <transition name="slide" appear>
          <div  class="info-box">
              <div class="close-info" @click="closeinfo"> X </div>
 
@@ -133,7 +132,7 @@
 
   <!-- component for modal displaying an image and its comments  -->
   <script id="modal-component" type="text/x-template">
-      <transition name="fade">
+      <transition name="fade" appear>
           <div class="modal">
           <div id="close" @click='closeModal'> X </div>
 
@@ -154,8 +153,7 @@
           <label class="lightgrey" for="comment"> COMMENT </label>
           <textarea v-model="newComment.comment" type="text" name="comment" id="comment" placeholder="your comment" autocomplete="off" minlength="2" required></textarea>
           <button class="submitcomment" @click="sendingComment"> SUBMIT </button>
-          <span v-if="error" class="error-comment"> Error: please make none of the fields are empty
-            before submitting.</span>
+          <span v-if="error" class="error-comment"> Error: please make none of the fields are empty before submitting.</span>
         </form>
 
           <div class="comments">

@@ -5,6 +5,10 @@ body {
   justify-content: center;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 /*
 MOBILE
 */
@@ -125,7 +129,7 @@ div.openinfo {
   left: 30px;
   cursor: pointer;
   padding: 30px;
-  z-index: 1000;
+  z-index: 1;
 }
 
 div.openinfo:hover {
@@ -136,29 +140,41 @@ div.openinfo:hover {
 
 /* slide  transition */
 
-.slide-leave-active,
-.slide-enter-active {
-  transition: 0.8s;
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: scale(0.3) translateY(-50%);
 }
 
-.slide-enter,
+.slide-enter-active{
+  transition: all 0.3s linear;
+}
+
+.slide-leave-active,
+.slide-leave-enter{
+  transition: all 0.5s linear;
+}
+
+.slide-enter {
+  transform: translate(0, 0);
+}
+
 .slide-leave-to {
   transform: translate(-100%, -100%);
 }
+
 
 div.info-box {
   width: 50%;
   height: 100%;
   position: fixed;
-  z-index: 1500;
-  background-color: blue;
-  left: 0;
-
-  color: white;
-
+  left:0;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  background-color: blue;
+  z-index: 2;
 }
 
 span.italic {
@@ -337,6 +353,7 @@ input.main {
   margin-bottom: 15px;
   margin-left: 15px;
   margin-right: 15px;
+  padding:3px;
 }
 
 @media (max-width: 1350px) {
@@ -393,8 +410,9 @@ MODAL - IMAGE
 }
 
 .fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
+.fade-leave-active, 
+.slide-leave-enter {
+  transition: opacity 0.4s;
 }
 
 .fade-leave-to {

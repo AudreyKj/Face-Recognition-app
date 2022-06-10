@@ -79,7 +79,7 @@ app.post("/upload", (req, res) => {
     } else {
       return res.json({ error: true });
     }
-  });
+  })
 });
 
 //cleaning images in the database every 15min
