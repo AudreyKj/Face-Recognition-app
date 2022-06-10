@@ -38,7 +38,7 @@ npm install
 Set up a PostgreSQL database (download [PostgreSQL](https://www.postgresql.org/download/) if necessary) and add the database credentials in an .env file (make sure this file is ignored by git).
 
 Next, create a free [Cloudinary](https://cloudinary.com/) account and add the credentials in the 
-.env file. The cloud storage account is needed to store the uploaded images; there are many providers (such as AWS ect.); I am using Cloudinary in this project.
+.env file. The cloud storage account is needed to store the uploaded images: there are many providers (such as AWS ect.) and I am using Cloudinary in this project.
 
 Run your app's local server:
 
@@ -49,5 +49,5 @@ npm start
 
 ## Screenshots
 
-![screenshot 1](screenshot_1.png)
-![screenshot 2](screenshot_2.png)
+![screenshot 1](screenshot1.png)
+![screenshot 2](screenshot2.png)
