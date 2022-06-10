@@ -31,7 +31,7 @@ A modal box where users can leave comments appears by clicking on each image. Ea
 Once you have cloned or downloaded the repository code:
 
 ```
-cd Face-detection-app
+cd Face-Recognition-app
 npm install
 ```
 
@@ -50,3 +50,4 @@ npm start
 ## Screenshots
 
 ![screenshot 1](screenshot_1.png)
+![screenshot 2](screenshot_2.png)
