@@ -60,7 +60,7 @@ LIMIT 10;`,
 }
 
 function cleanImagesDb() {
-  return db.query(`DELETE FROM images WHERE id > 5`);
+  return db.query(`DELETE FROM images WHERE id > 10`);
 }
 
 function cleanCommentsDb() {
