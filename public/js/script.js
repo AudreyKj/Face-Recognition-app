@@ -214,8 +214,7 @@
     methods: {
       submitFile: function(e) {
         e.preventDefault();
-        me.error = false;
-        
+
         var fomData = new FormData();
         fomData.append("title", this.title);
         fomData.append("description", this.description);
