@@ -9,8 +9,6 @@ Users can take screenshots and upload images to the site. The images that have b
 
 A modal box where users can leave comments appears by clicking on each image. Each image has a specific url that users can send for reference.
 
-[visit live app](https://face-face-face.herokuapp.com/)
-
 ## Features
 
 - face-detection API on users' webcams
