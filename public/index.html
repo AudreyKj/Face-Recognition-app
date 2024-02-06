@@ -26,24 +26,9 @@
     </div>
 
     <!-- videocam + upload  -->
-    <div id="modal-videocam">
-      <div class="guidelines" v-if="guidelines">
-        <div id="close-instructions" @click="closeguidelines">X</div>
-        <span class="instructions">
-          CONNECT YOUR CAMERA <br />
-          Please allow access to your camera to use the face detection API
-        </span>
-        <span class="instructions">
-          TAKE A SCREENSHOT <br />
-          Take a screenshot centered on your face and upload the image to the
-          imageboard</span>
-        <span class="instructions">
-          BROWSE AND COMMENT ON POSTED IMAGES<br />
-          Scroll to browse the images that have been posted by others. <br />
-          You can leave comments by clicking on the images!
-        </span>
-      </div>
 
+    <div id="modal-videocam">
+      
       <video id="video" width="700px" height="500px" autoplay muted></video>
 
       <div class="inputs">
@@ -57,7 +42,7 @@
 
             <div class="input-wrapper">
               <label for="description"> DESCRIPTION</label>
-              <input class="main" v-model="description" type="text" name="description" placeholder="description"
+              <input class="main" v-model="description" type="text" name="description" placeholder="short description"
                 autocomplete="off" required pattern="\S+.*" />
             </div>
 
@@ -69,15 +54,15 @@
           </div>
 
           <label for="file-upload" class="custom-file-upload">
-            UPLOAD SCREENSHOT
+            UPLOAD & SHARE YOUR SELFIE
             <img class="logo-upload" src="download-file.svg" alt="download" />
           </label>
 
           <input id="file-upload" class="file" @change="uploading" type="file" name="file" accept="image/*" />
 
-          <button id="submit" class="inputs-main" @click="submitFile">
-            SUBMIT
-          </button>
+          <!-- <button id="submit" class="inputs-main" @click="submitFile">
+            SHARE
+          </button> -->
 
           <span v-if="error" class="error" v-cloak>
             Error: check that the fields are filled and try with a smaller file</span>
@@ -87,6 +72,21 @@
           </span>
         </form>
       </div>
+    </div>
+    <div class="guidelines" v-if="guidelines">
+      <div id="close-instructions" @click="closeguidelines">X</div>
+      <span class="instructions">
+        <b>CONNECT YOUR CAMERA </b><br />
+        Please allow access to your camera
+      </span>
+      <span class="instructions">
+        <b>TAKE A SCREENSHOT</b><br />
+        Take a screenshot centered on your face and upload it</span>
+      <span class="instructions">
+        <b>BROWSE</b><br />
+        Browse the selfies posted by others. <br /><br/>
+        You can leave comments by clicking on the images.
+      </span>
     </div>
 
     <!-- images in main  -->
@@ -113,16 +113,20 @@
              <div class="close-info" @click="closeinfo"> X </div>
 
                  <p class="info">
-                     <br><br>
-                     CONNECT YOUR CAMERA <br> please allow access to your camera to use the face detection API
-                     <br><br>
-                     TAKE A SCREENSHOT <br> take a screenshot centered on your face and upload the image to the imageboard
-                     <br><br>
-                     BROWSE AND COMMENT ON POSTED IMAGES <br> scroll to browse the images that have been posted by others; <br />
-                     you can leave comments by clicking on the images
-                     <br><br>
+                  <span class="instructions">
+                    <b>CONNECT YOUR CAMERA </b><br />
+                    Please allow access to your camera
+                  </span>
+                  <span class="instructions">
+                    <b>TAKE A SCREENSHOT</b><br />
+                    Take a screenshot centered on your face and upload it</span>
+                  <span class="instructions">
+                    <b>BROWSE</b><br />
+                    Browse the selfies posted by others. <br /><br/>
+                    You can leave comments by clicking on the images.
+                  </span>
 
-                     <span class="italic"> this site was developed by <a class="info" href="https://github.com/AudreyKj" target="_blank"> Audrey Kadjar </a> <br />
+                     <span class="italic"> this site was developed by <a class="info" href="https://github.com/AudreyKj" target="_blank">Audrey Kadjar</a> <br />
                       more information on <a class="info" href="https://github.com/AudreyKj" target="_blank"> GitHub </a></span>
                    </p>
 

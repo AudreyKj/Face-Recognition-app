@@ -111,7 +111,7 @@
     data: {
       id: location.hash.slice(1),
       guidelines: true,
-      showingMore: true,
+      showingMore: false,
       lowestId: "",
       cutoff: "",
       images: [],
@@ -151,6 +151,7 @@
       // draw face detection canvas on videocam play
       video.addEventListener("play", function() {
         const canvas = faceapi.createCanvasFromMedia(video);
+        canvas.style.marginTop = '30px'
 
         //fixing bug of canvas being appended several times
         if (!document.body.contains(document.querySelector("canvas"))) {
@@ -212,8 +213,7 @@
       });
     },
     methods: {
-      submitFile: function(e) {
-        e.preventDefault();
+      submitFile: function() {
 
         var fomData = new FormData();
         fomData.append("title", this.title);
@@ -260,6 +260,8 @@
       },
       uploading: function(e) {
         this.file = e.target.files[0];
+
+        this.submitFile()
       },
       closemodal: function() {
         var me = this;
@@ -304,6 +306,8 @@
             for (let i = 0; i < me.images.length; i++) {
               if (me.images[i].id === me.images[i].lowestId) {
                 me.showingMore = false;
+              } else {
+                me.showingMore = true;
               }
             }
           })
