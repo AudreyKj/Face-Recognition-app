@@ -112,6 +112,7 @@ span.instructions {
   color: lightgrey;
   display: block;
   padding-bottom: 30px;
+  line-height:1.15;
 }
 
 div#close-instructions {
@@ -301,7 +302,7 @@ div.inputs {
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  padding: 15px;
+  padding: 30px;
   background-color: #9c9c9c;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 100%;
@@ -349,7 +350,7 @@ label.custom-file-upload {
   border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 12px;
-  margin-top:5px;
+  margin-top:10px;
   cursor: pointer;
 
   display: flex;
